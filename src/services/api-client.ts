@@ -24,7 +24,7 @@ const axiosInstance = axios.create({
   baseURL: import.meta.env["VITE_API_URL"], // make sure it's "http://localhost:8080"
   headers: {
     "Content-Type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc2NDYwNzI2MSwiZXhwIjoxNzY0NjEwODYxfQ.nU_Ye32A5UKrBisaxR3XFrN561xYfxzA6NcQqh09_rc",
+    "Authorization": "Bearer" + import.meta.env["token"],
   },
 });
 
