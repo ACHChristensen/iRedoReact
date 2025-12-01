@@ -1,39 +1,46 @@
-import { Button, For, Input, Link, SimpleGrid, Tabs } from "@chakra-ui/react";
+import { Flex, Button, Input, Link, useBreakpointValue } from "@chakra-ui/react";
 import { CiSearch } from "react-icons/ci";
 
-const MENUTIMES: string[] = [
-  "Marketplace",
-  "Inspiration",
-  "About us"
-  ];
-
+const MENUTIMES: string[] = ["Marketplace", "Inspiration", "About us"];
 const PLACEHOLDERFORSEARCH: string = "Search on website...";
 
 const PlatformSelector = () => {
+  // Adjust layout direction based on screen size
+  const direction = useBreakpointValue({ base: "column", md: "row" });
+  const gap = useBreakpointValue({ base: 2, md: 4 });
+
   return (
-    <SimpleGrid className="navbar">
-        <Tabs.Root variant="plain">
-          <Tabs.List >
-            <For each={MENUTIMES}> 
-              {(item) =>
-                <Link key={item}  defaultValue="Market Place" >
-                  <Tabs.Trigger className="text-navbar-hover"  value={item}>
-                    {item}
-                  </Tabs.Trigger>
-                </Link>}
-            </For>
-            <Tabs.Trigger  value="Søg">
-              <Input type="search" className="text-navbar-hover marked" fontStyle="italic" placeholder={PLACEHOLDERFORSEARCH} size="xs" variant="outline" width="10pc"/>
-              <Button variant="ghost" size="xs" >
-                <CiSearch/>
-              </Button>
-            </Tabs.Trigger>
-            <Tabs.Trigger value="registerLogin">
-              
-            </Tabs.Trigger>
-          </Tabs.List>  
-        </Tabs.Root>
-      </SimpleGrid>
+    <Flex
+      direction={direction}
+      align="center"
+      wrap="wrap"
+      gap={gap}
+    >
+      {MENUTIMES.map((item) => (
+        <Link
+          key={item}
+          href="#"
+          _hover={{ textDecoration: "none", color: "teal.500" }}
+        >
+          <Button variant="plain" size="sm">
+            {item}
+          </Button>
+        </Link>
+      ))}
+
+      {/* Search input + button */}
+      <Flex mt={{ base: 2, md: 0 }} gap={2} align="center">
+        <Input
+          type="search"
+          placeholder={PLACEHOLDERFORSEARCH}
+          size="sm"
+          width={{ base: "100%", md: "12rem" }}
+        />
+        <Button size="sm" variant="outline">
+          <CiSearch />
+        </Button>
+      </Flex>
+    </Flex>
   );
 };
 
