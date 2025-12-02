@@ -64,5 +64,6 @@ jobs:
             curl -X POST "$RENDER_DEPLOY_HOOK"
           else
             echo "Render deploy hook not set. Skipping deploy."
+          fi
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
